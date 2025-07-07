@@ -12,7 +12,16 @@ def extract_stories_from_NPR_text(text):
       Each story should be a tuple of (title, teaser), where the title and teaser are
       both strings.  If the story has no teaser, its teaser should be an empty string.
     '''
-    raise RuntimeError('You need to write this part!')
+    # raise RuntimeError('You need to write this part!')
+    soup = bs4.BeautifulSoup(text, "html.parser")
+    div_tags = soup.find_all('div', 'story-text')
+    stories = []
+    for div_tag in div_tags:
+      title = div_tag.find('h3', 'title')
+      teaser = div_tag.find('p', 'teaser')
+      if teaser == None:
+        teaser = ''
+      stories.append((title, teaser))
     return stories
     
 def read_nth_story(stories, n, filename):
@@ -26,4 +35,5 @@ def read_nth_story(stories, n, filename):
 
     Output: None
     '''
-    raise RuntimeError('You need to write this part!')
+    # raise RuntimeError('You need to write this part!')
+  gtts.gTTS(text = stories[n][0]+" "+stories[n][1], lang="en").save(filename)
