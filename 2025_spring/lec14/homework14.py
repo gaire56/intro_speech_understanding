@@ -89,7 +89,7 @@ def personal_assistant(lang, filename):
     elif lang=="zh":
         keywords = ["几奌","玩笑","什么日子","对不起，我没听懂你的话"]
     else:
-        speech_package.synthesize("I don't know that language!","en",filename)
+        gtts.gTTS("I don't know that language!","en",filename)
         return
 
     r = speech_recognition.Recognizer()
@@ -119,6 +119,7 @@ def personal_assistant(lang, filename):
             break
         elif keywords[2] in text:
             what_day_is_it(lang, filename)
+            break
         else:
             print(keywords[3])
             print('I will try again')
